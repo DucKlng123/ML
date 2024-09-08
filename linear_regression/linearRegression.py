@@ -13,7 +13,7 @@ class LinearRegression:
         """
         (data_processed,
          features_mean,
-         features_deviation) = prepare_for_training(data, polynomial_degree = 0 , sinusoid_degree = 0, normalize_data= True)
+         features_deviation) = prepare_for_training(data, polynomial_degree, sinusoid_degree, normalize_data)
 
         self.data = data_processed
         self.labels = labels
@@ -67,7 +67,7 @@ class LinearRegression:
         prediction = self.hypothesis(data,theta)
         delta = prediction - self.labels
         cost = np.dot(delta.T,delta)/(2*data.shape[0])
-        return cost
+        return cost[0][0]
 
     def get_cost(self,data,labels):
         data_processed = prepare_for_training(data, polynomial_degree = self.polynomial_degree , sinusoid_degree = self.sinusoid_degree, normalize_data= self.normalize_data)[0]
@@ -77,3 +77,4 @@ class LinearRegression:
         data_processed = prepare_for_training(data, polynomial_degree = self.polynomial_degree , sinusoid_degree = self.sinusoid_degree, normalize_data= self.normalize_data)[0]
         predictions = self.hypothesis(data_processed,self.theta)
 
+        return predictions
